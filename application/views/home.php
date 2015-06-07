@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Git-UAP</title>
+	<title>Git-UAP | 2015</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="<?=base_url();?>assets/frontend/js/jquery.form.js"></script>
 	<script src="<?=base_url();?>assets/frontend/js/jquery.validate.js"></script>
