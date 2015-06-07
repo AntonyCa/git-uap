@@ -20,10 +20,41 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('home');
+		$this->load->model('muser');
+		if ($this->muser->isSesion()) {
+			$data['usuario']=$this->session->userdata('usuario');
+			$this->load->view('pageAuth',$data);
+		}else{
+			$this->load->view('home');
+		}
+		
 	}
 	public function error404()
 	{
+		echo "error";
 		$this->load->view('home');
+	}
+	public function subir()
+	{
+		$config['upload_path'] = './files/pdf/';
+		$config['allowed_types'] = 'pdf';
+		$config['max_size']	= '2000';
+		
+		$this->load->library('upload', $config);
+
+		if ( $this->upload->do_upload('pdf')){
+			var_dump($this->upload->data());
+
+			$this->load->helper('gpdf_thumb');
+			 
+			$pdf_file_url = base_url()."files/pdf/".$this->upload->data()['file_name'];
+			echo $pdf_file_url;
+			$file_path = "./files/pdfimage/pdf_thumb.png";
+			saveGPDFThumb($pdf_file_url, $file_path);
+			//show the image
+			//echo "<p><a href=\"$pdfWithPath\"><img src=\"$thumbDirectory$thumb\" alt=\"\" /></a></p>";
+		}else{
+			var_dump($this->upload->display_errors());
+		}
 	}
 }
